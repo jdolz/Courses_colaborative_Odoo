@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Plantilla traducible -->
+    <template id = "report_courses_employees_document">
+    <!-- Usaremos el idioma, o lang, configurado para cada usuario responsabe de la tarea -->
+        <t t-set = "doc" t-value = "doc.with_context(lang = doc.professor.lang)" />
+
+        <t t-call = "web.external_layout">
+            <div class="page">
+                <div class="row">
+                    <h3>
+                        <span t-field="doc.name"/>
+                    </h3>
+                </div>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th style="width:35%;">Professor</th>
+                            <th style="width:15%;">Employees</th>
+                            <th style="width:15%;">Duration</th>
+                            <th style="width:15%;">Price</th>
+                            <th style="width:15%;">Discount</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td style="width:25%;">
+                                <span t-field="doc.professor"/>
+                            </td>
+                            <td class="text-rigth">
+                        <!-- esto es para escribir variables a parte -->
+                                <span t-field="doc.number_employees"/>
+                            </td>
+                            <td class="text-rigth">
+                        <!-- esto es para escribir variables a parte -->
+                                <span t-field="doc.duration"/>
+                            </td>
+                            <td class="text-rigth">
+                        <!-- esto es para escribir variables a parte -->
+                                <span t-field="doc.price"/>
+                            </td>
+                            <td class="text-rigth">
+                        <!-- esto es para escribir variables a parte -->
+                                <span t-field="doc.discount"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+    <!-- Plantilla principal -->
+    <template id = "report_courses_employees">
+        <t t-call = "web.html_container">
+            <t t-foreach = "docs" t-as = "doc">
+                <t t-call = "courses_kanban.report_courses_employees_document" t-lang = "doc.professor.lang" />
+            </t>
+        </t>
+    </template>
+</odoo>

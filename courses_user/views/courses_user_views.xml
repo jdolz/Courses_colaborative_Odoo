@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Action to open To-do Task list -->
+    <act_window
+            id="action_courses_colab_course"
+            name="Courses Colaborative"
+            res_model="courses.course"
+            view_mode="tree,form,graph,pivot"
+    />
+    <!-- Menu item to open To-do Task list -->
+    <menuitem
+            id="menu_courses_course"
+            name="Courses Colaborative"
+            parent="courses_app.l1_menu_courses_course"
+            action="action_courses_colab_course"
+    />
+    <!-- Vista de listado -->
+    <record id="view_tree_courses_course_inherited" model="ir.ui.view">
+        <field name="name">Courses Course Tree – User extension</field>
+        <field name="model">courses.course</field>
+        <field name="inherit_id" ref="courses_app.view_tree_courses_course"/>
+        <field name="arch" type="xml">
+
+            <field name="professor" position="after">
+                <field name="link" widget="url" readonly="1" text="Link to the course"/>
+            </field>
+            
+            <field name="price" position="after">
+                <field name="discount"/>
+            </field>
+
+            <field name="total" position="after">
+                 <field name="total_discount" sum="Total"/>
+            </field>
+
+            <field name="total_discount" position="after">
+                <field name="total_iva" sum="Total"/>
+            </field> 
+
+            <!--<field name="contents" position="after">
+                <field name="professor"/>
+            </field>-->
+        </field>
+    </record>
+    
+    <!-- Vista de Formulario -->
+    <record id="view_form_courses_course_inherited" model="ir.ui.view">
+        <field name="name">Courses Course Form – Collaborative</field>
+        <field name="model">courses.course</field>
+        <field name="inherit_id" ref="courses_app.view_form_courses_course"/>
+        <field name="arch" type="xml">
+
+            <field name="professor" position="after">
+                <field name="link"/>
+            </field>
+            <field name="price" position="after">
+                <field name="discount"/>
+            </field>
+            <!--<field name="contents" position="after">
+                <field name="professor"/>
+            </field>-->
+
+            <sheet position="after">
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </sheet>
+        </field>
+    </record>
+
+     <record id="view_graph_courses_course" model="ir.ui.view">
+        <field name="name">Courses Course Graph</field>
+        <field name="model">courses.course</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="professor" />
+                <field name="number_employees" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_pivot_courses_course" model="ir.ui.view">
+        <field name="name">Courses Course Pivot</field>
+        <field name="model">courses.course</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="professor" type="col"/>
+                <field name="number_employees" type="row"/>
+            </pivot>
+        </field>
+    </record>  
+
+</odoo>

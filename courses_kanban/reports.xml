@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <report
+        id="report_courses_employees"
+        model="courses.course"
+        string="Numero de Empleados"
+        report_type="qweb-pdf"
+        name="courses_kanban.report_courses_employees"
+        attachment_use="False"
+        file="courses_kanban.report_courses_employees" />
+
+</odoo>

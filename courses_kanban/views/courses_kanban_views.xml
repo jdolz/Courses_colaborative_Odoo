@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <act_window id="action_courses_kanban" name="Courses Kanban Board" res_model="courses.course" view_mode="kanban,tree,form" />
+    <!-- Menu item to open To-do Kanban Board -->
+    <menuitem id="menu_courses_kanban" name="Courses Kanban Board" parent="courses_app.l1_menu_courses_course" sequence="30" action="action_courses_kanban" />
+
+    <record id="Courses Course Kanban" model="ir.ui.view">
+        <field name="name">Courses Kanban</field>
+        <field name="model">courses.course</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="kanban_state" default_order="date_ini" quick_create="false">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card">
+                            <div class="oe_kanban_content">
+                                <h4>
+                                    <a type="open">
+                                        <field name="name" />
+                                    </a>
+                                </h4>
+                                <ul>
+                                    <li>
+                                        <field name="professor" />
+                                    </li>
+                                    <li>
+                                        <field name="date_ini" />
+                                    </li>
+                                </ul>
+                                <div class="oe_kanban_bottom_right">
+                                    <field name="kanban_state" widget="kanban_state_selection"/>
+                                </div>
+                                <div class="oe_kanban_footer_left">
+                                    <field name="recommended" widget="priority"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>
